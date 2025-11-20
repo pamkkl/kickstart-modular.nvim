@@ -1,5 +1,20 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+-- custom keymaps
+
+-- Yank to system clipboard (normal + visual mode)
+vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]], { desc = 'Yank to system clipboard' })
+vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank line to system clipboard' })
+
+-- Paste from system clipboard (normal mode)
+vim.keymap.set('n', '<leader>p', [["+p]], { desc = 'Paste from system clipboard' })
+vim.keymap.set('n', '<leader>P', [["+P]], { desc = 'Paste before cursor from system clipboard' })
+
+-- Delete current buffer
+vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = '[B]uffer [D]elete' })
+
+-- Exit insert mode
+vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
