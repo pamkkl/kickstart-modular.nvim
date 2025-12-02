@@ -16,6 +16,10 @@ vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = '[B]uffer [D]elete' }
 -- Exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
 
+-- Insert current date
+vim.keymap.set('n', '<leader>d', ':r! date "+\\%Y-\\%m-\\%d" <CR>', { desc = '[D]ate' })
+-- vim.keymap.set('n', '<leader>tt', ':r! date "+\\%H:\\%M:\\%S" <CR>', { noremap = true })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
