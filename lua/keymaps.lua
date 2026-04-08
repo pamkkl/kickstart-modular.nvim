@@ -13,6 +13,10 @@ vim.keymap.set('n', '<leader>P', [["+P]], { desc = 'Paste before cursor from sys
 -- Delete current buffer
 vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = '[B]uffer [D]elete' })
 
+-- Next/Prev buffer
+vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = '[B]uffer [N]ext' })
+vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { desc = '[B]uffer [P]revious' })
+
 -- Exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
 
