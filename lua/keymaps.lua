@@ -10,6 +10,74 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank line to system clipboar
 vim.keymap.set('n', '<leader>p', [["+p]], { desc = 'Paste from system clipboard' })
 vim.keymap.set('n', '<leader>P', [["+P]], { desc = 'Paste before cursor from system clipboard' })
 
+-- Execute ngspice file (normal mode)
+local ngspice = {
+  buf = nil,
+  win = nil,
+  job = nil,
+}
+
+local function open_ngspice()
+  -- create buffer once
+  if not ngspice.buf or not vim.api.nvim_buf_is_valid(ngspice.buf) then
+    ngspice.buf = vim.api.nvim_create_buf(false, true)
+  end
+
+  local prev_win = vim.api.nvim_get_current_win()
+
+  -- open split if not visible
+  if not ngspice.win or not vim.api.nvim_win_is_valid(ngspice.win) then
+    vim.cmd 'botright split'
+    ngspice.win = vim.api.nvim_get_current_win()
+    vim.api.nvim_win_set_buf(ngspice.win, ngspice.buf)
+
+    -- start job only once (IMPORTANT: must happen AFTER term buffer is attached)
+    ngspice.job = vim.fn.termopen({ 'ngspice' }, {
+      on_exit = function()
+        ngspice.job = nil
+      end,
+    })
+  end
+
+  -- enforce 20% height split
+  local height = math.floor(vim.o.lines * 0.2)
+  vim.api.nvim_win_set_height(ngspice.win, height)
+
+  -- restore focus to code window
+  vim.api.nvim_set_current_win(prev_win)
+end
+
+vim.keymap.set('n', '<leader>ng', function()
+  vim.cmd 'write'
+  local file = vim.fn.expand '%:p'
+
+  open_ngspice()
+
+  if ngspice.job then
+    vim.fn.chansend(ngspice.job, 'source ' .. file .. '\n')
+  end
+end, { desc = 'Send file to ngspice (reuse terminal)' })
+
+vim.keymap.set('n', '<leader>nk', function()
+  if ngspice.job then
+    vim.fn.chansend(ngspice.job, 'quit\n')
+
+    vim.defer_fn(function()
+      if ngspice.job then
+        vim.fn.jobstop(ngspice.job)
+      end
+    end, 500)
+  end
+
+  if ngspice.win and vim.api.nvim_win_is_valid(ngspice.win) then
+    vim.api.nvim_win_close(ngspice.win, true)
+  end
+
+  ngspice.win = nil
+  ngspice.buf = nil
+  ngspice.job = nil
+end, { desc = 'Stop ngspice + close terminal' })
+
 -- Delete current buffer
 vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = '[B]uffer [D]elete' })
 
