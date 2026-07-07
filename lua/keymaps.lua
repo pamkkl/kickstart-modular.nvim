@@ -78,12 +78,13 @@ vim.keymap.set('n', '<leader>nk', function()
   ngspice.job = nil
 end, { desc = 'Stop ngspice + close terminal' })
 
--- Delete current buffer
-vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = '[B]uffer [D]elete' })
-
 -- Next/Prev buffer
+vim.keymap.set('n', '<leader>bb', ':bnext<CR>', { desc = '[B]uffer Next' })
 vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<leader>bp', ':bprevious<CR>', { desc = '[B]uffer [P]revious' })
+--
+-- Delete current buffer
+vim.keymap.set('n', '<leader>bd', ':bdelete<CR>', { desc = '[B]uffer [D]elete' })
 
 -- Exit insert mode
 vim.keymap.set('i', 'jk', '<Esc>', { desc = 'Exit insert mode with jk' })
