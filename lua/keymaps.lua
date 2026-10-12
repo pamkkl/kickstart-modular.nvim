@@ -10,6 +10,8 @@ vim.keymap.set('n', '<leader>Y', [["+Y]], { desc = 'Yank line to system clipboar
 vim.keymap.set('n', '<leader>p', [["+p]], { desc = 'Paste from system clipboard' })
 vim.keymap.set('n', '<leader>P', [["+P]], { desc = 'Paste before cursor from system clipboard' })
 
+-- Toggle neotree
+vim.keymap.set('n', '<leader>e', '<cmd>Neotree toggle<CR>', { desc = 'Toggle [E]ditor Neo-tree' })
 -- Execute ngspice file (normal mode)
 local ngspice = {
   buf = nil,
