@@ -68,6 +68,18 @@ return {
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
+    config = function(_, opts)
+      require('which-key').setup(opts)
+
+      vim.api.nvim_create_autocmd('FileType', {
+        pattern = 'tex',
+        callback = function(ev)
+          require('which-key').add {
+            { '<localleader>l', group = '[L]atex (vimtex)', buffer = ev.buf },
+          }
+        end,
+      })
+    end,
   },
 }
 -- vim: ts=2 sts=2 sw=2 et
