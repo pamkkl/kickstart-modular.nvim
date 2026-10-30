@@ -13,12 +13,12 @@ return {
       callback = function(ev)
         local opts = { buffer = ev.buf, silent = true }
 
-        vim.keymap.set('n', '<localleader>le', '<Cmd>Errors<CR>', opts)
-        vim.keymap.set('n', '<localleader>lk', '<Cmd>Stop<CR>', opts)
-        vim.keymap.set('n', '<localleader>lK', '<Cmd>Stop All<CR>', opts)
-        vim.keymap.set('n', '<localleader>ll', '<Cmd>Compile<CR>', opts)
-        vim.keymap.set('n', '<localleader>lv', '<Cmd>View<CR>', opts)
-        vim.keymap.set('n', '<localleader>lx', '<Cmd>Reload<CR>', opts)
+        vim.keymap.set('n', '<localleader>le', '<Cmd>VimtexErrors<CR>', opts)
+        vim.keymap.set('n', '<localleader>lk', '<Cmd>VimtexStop<CR>', opts)
+        vim.keymap.set('n', '<localleader>lK', '<Cmd>VimtexStop All<CR>', opts)
+        vim.keymap.set('n', '<localleader>ll', '<Cmd>VimtexCompile<CR>', opts)
+        vim.keymap.set('n', '<localleader>lv', '<Cmd>VimtexView<CR>', opts)
+        vim.keymap.set('n', '<localleader>lx', '<Cmd>VimtexReload<CR>', opts)
       end,
     })
   end,
